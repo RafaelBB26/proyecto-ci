@@ -13,6 +13,9 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
+      - name: Ejecutar pruebas
+        run: chmod +x test.sh && ./test.sh
+
       - name: Login a Docker Hub
         uses: docker/login-action@v2
         with:
@@ -24,3 +27,10 @@ jobs:
 
       - name: Push imagen a Docker Hub
         run: docker push rbb26/proyecto-ci:latest
+
+      - name: Deploy automático en VM
+        run: |
+          docker pull rbb26/proyecto-ci:latest
+          docker stop proyecto-ci-run || true
+          docker rm proyecto-ci-run || true
+          docker run -d --name proyecto-ci-run rbb26/proyecto-ci:latest
