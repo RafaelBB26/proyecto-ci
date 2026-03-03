@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build imagen Docker
-        run: docker build -t RafaelBB26/proyecto-ci:latest .
+        run: docker build -t rbb26/proyecto-ci:latest .
 
       - name: Push imagen a Docker Hub
-        run: docker push RafaelBB26/proyecto-ci:latest
+        run: docker push rbb26/proyecto-ci:latest
